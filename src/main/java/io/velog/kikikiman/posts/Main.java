@@ -10,20 +10,23 @@ public class Main {
     public static void main(String[] args) {
         int threadCount = 10;
 
-        long startTimeStringBuilder = System.currentTimeMillis();
+        long startTimeStringBuilder = System.nanoTime();
         testStringBuilder(threadCount);
-        long endTimeStringBuilder = System.currentTimeMillis();
+        long endTimeStringBuilder = System.nanoTime();
 
-        long startTimeStringBuffer = System.currentTimeMillis();
+        long startTimeStringBuffer = System.nanoTime();
         testStringBuffer(threadCount);
-        long endTimeStringBuffer = System.currentTimeMillis();
+        long endTimeStringBuffer = System.nanoTime();
 
-        System.out.println("Time taken for StringBuilder: " + (endTimeStringBuilder - startTimeStringBuilder) + " milliseconds");
-        System.out.println("Time taken for StringBuffer: " + (endTimeStringBuffer - startTimeStringBuffer) + " milliseconds");
+        System.out.println("StringBuilder: " + (endTimeStringBuilder - startTimeStringBuilder) + " milliseconds");
+        System.out.println("StringBuffer:  " + (endTimeStringBuffer - startTimeStringBuffer) + " milliseconds");
+
+
     }
 
     public static void testStringBuilder(int threadCount) {
         StringBuilder sb = new StringBuilder();
+
         int forLength = 1000000;
         Runnable task = () -> {
             for (int i = 0; i <= forLength; i++) {
@@ -40,8 +43,10 @@ public class Main {
 
     public static void testStringBuffer(int threadCount) {
         StringBuffer sb = new StringBuffer();
+
         int forLength = 1000000;
         Runnable task = () -> {
+
             for (int i = 0; i <= forLength; i++) {
                 sb.append("a");
                 if(i == forLength){
